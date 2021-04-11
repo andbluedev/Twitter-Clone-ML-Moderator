@@ -1,0 +1,15 @@
+.tweet {
+    border-radius: 2rem;
+}
+
+.textarea {
+    -webkit-border-radius: 5rem;
+    -moz-border-radius: 5rem;
+    border-radius: 40;
+    font-family: sans-serif;
+    resize: none;
+}
+
+.btn {
+    border-radius: 2rem;
+}
