@@ -84,7 +84,8 @@ build/
 
 ### VS Code ###
 .vscode/
-./start_dev.sh*.log
+./start_dev.sh
+*.log
 
 start_dev.sh
 *.log
