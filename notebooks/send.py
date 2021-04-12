@@ -6,15 +6,26 @@
 
 #!/usr/bin/env python
 import pika
+import joblib
 
-connection = pika.BlockingConnection(
-    pika.ConnectionParameters(host='localhost'))
+
+connection = pika.BlockingConnection(pika.ConnectionParameters(host='localhost'))
 channel = connection.channel()
 
-channel.queue_declare(queue='hello')
+channel.queue_declare(queue='Touitter')
 
-channel.basic_publish(exchange='', routing_key='hello', body='Hello World!')
-print(" [x] Sent 'Hello World!'")
+
+touit = "This is a test"
+
+channel.basic_publish(exchange='', routing_key='Touitter', body=touit)
+print(" [x] Sent : ", touit)
+
+
+
+ 
+
+
+
 connection.close()
 
 
