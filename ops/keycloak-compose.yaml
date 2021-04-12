@@ -24,7 +24,7 @@ services:
         DB_DATABASE: ${KEYCLOAK_DATABASE}
         DB_USER: ${KEYCLOAK_USER}
         DB_SCHEMA: public
-        DB_PASSWORD: ${DATABASE_PASSWORD}
+        DB_PASSWORD: ${DATABASE_ROOT_PASSWORD}
         KEYCLOAK_USER: ${KEYCLOAK_USER}
         KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
         # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
