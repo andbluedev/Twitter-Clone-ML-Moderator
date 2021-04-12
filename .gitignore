@@ -87,3 +87,7 @@ build/
 start_dev.sh
 *.log
 .env
+env.sh
+
+# Repo specific
+ops/rabbitmq

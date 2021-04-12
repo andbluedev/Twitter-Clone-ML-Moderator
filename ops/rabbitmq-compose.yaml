@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  rabbitmq:
+    image: rabbitmq:3.8
+    hostname: my-rabbit
+    restart: always
+    volumes:
+      - ./rabbitmq/data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+      - ./rabbitmq/logs:/var/log/rabbitmq/log
+      # - ./rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      # - ./rabbitmq/etc/definitions.json:/etc/rabbitmq/definitions.json
+    environment:
+      RABBITMQ_DEFAULT_USER: ${MQ_USER}
+      RABBITMQ_DEFAULT_PASS: ${MQ_PASSWORD}
+    ports:
+      - 5672:5672
+      # - 15672:15672

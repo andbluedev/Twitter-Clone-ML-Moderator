@@ -30,6 +30,10 @@ public class Tweet {
     @Enumerated(EnumType.STRING)
     private TweetLabel label;
 
+    @Column(name = "profanity_index", nullable = true)
+    @JsonProperty("profanity_score")
+    private float profanityScore;
+
     // Replies to a tweet
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "replying_to")

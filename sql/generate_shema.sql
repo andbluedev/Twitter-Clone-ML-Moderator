@@ -14,6 +14,7 @@ CREATE table users (
 CREATE TABLE tweets (
 	id uuid DEFAULT uuid_generate_v4(),
 	category tweet_label default null,
+	profanity_index float default null,
 	text VARCHAR(280),
 	
 	author_id uui,

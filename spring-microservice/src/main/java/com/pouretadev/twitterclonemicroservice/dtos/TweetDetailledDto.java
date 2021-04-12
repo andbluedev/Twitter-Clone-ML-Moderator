@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.pouretadev.twitterclonemicroservice.entities.TweetLabel;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -21,6 +22,12 @@ public class TweetDetailledDto {
 
     @JsonProperty("author")
     public String authorUsername;
+
+    @JsonProperty("profanity_score")
+    private TweetLabel label;
+
+    @JsonProperty("profanity_score")
+    public float profanityScore;
     
     @JsonProperty("replyingTo")
     public UUID replyToTweet;

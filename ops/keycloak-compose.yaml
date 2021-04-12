@@ -1,0 +1,39 @@
+version: '3'
+
+volumes:
+  postgres_data:
+      driver: local
+
+services:
+  postgres:
+      image: postgres
+      volumes:
+        - postgres_data:/var/lib/postgresql/data
+      environment:
+        POSTGRES_DB: ${KEYCLOAK_DATABASE}
+        POSTGRES_USER: ${KEYCLOAK_USER}
+        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      ports:
+        - 5432:5432
+
+  keycloak:
+      image: quay.io/keycloak/keycloak:latest
+      environment:
+        DB_VENDOR: POSTGRES
+        DB_ADDR: postgres
+        DB_DATABASE: ${KEYCLOAK_DATABASE}
+        DB_USER: ${KEYCLOAK_USER}
+        DB_SCHEMA: public
+        DB_PASSWORD: ${DATABASE_PASSWORD}
+        KEYCLOAK_USER: ${KEYCLOAK_USER}
+        KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the PostgreSQL JDBC driver documentation in order to use it.
+        #JDBC_PARAMS: "ssl=true"
+      volumes:
+        - ${CERTIFICATE_PATH}:/etc/x509/https/tls.crt
+        - ${PRIVKEY_PATH}:/etc/x509/https/tls.key
+      ports:
+        - 8443:8443
+        - 8080:8080
+      depends_on:
+        - postgres

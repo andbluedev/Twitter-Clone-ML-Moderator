@@ -24,6 +24,7 @@ import com.pouretadev.twitterclonemicroservice.entities.User;
 import com.pouretadev.twitterclonemicroservice.mappers.TweetMapper;
 import com.pouretadev.twitterclonemicroservice.repositories.TweetRepository;
 import com.pouretadev.twitterclonemicroservice.repositories.UserRepository;
+import com.pouretadev.twitterclonemicroservice.services.MLQueueService;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,13 +34,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 public class TweetController {
     private final TweetRepository tweetRepository;
     private final UserRepository userRepository;
+    private final MLQueueService queueService;
     private final TweetMapper tweetMapper = new TweetMapper();
     private static final Logger logger = LoggerFactory.getLogger(TweetController.class);
 
     @Autowired
-    public TweetController(TweetRepository tweetRepository, UserRepository userRepository) {
+    public TweetController(TweetRepository tweetRepository, UserRepository userRepository,
+            MLQueueService queueService) {
         this.tweetRepository = tweetRepository;
         this.userRepository = userRepository;
+        this.queueService = queueService;
     }
 
     // @RolesAllowed("user")
@@ -66,17 +70,20 @@ public class TweetController {
         newTweet.setText(newTweetDto.getText());
         newTweet.setLabel(TweetLabel.unprocessed);
 
-        return this.tweetRepository.save(newTweet);
+        Tweet savedTweet = this.tweetRepository.save(newTweet);
+
+        this.queueService.sendTweet(savedTweet);
+
+        return savedTweet;
     }
-    
+
     @PostMapping("/{uid}/reply")
     @ResponseStatus(HttpStatus.CREATED)
     public Tweet replyingToTweet(@RequestBody NewTweetDto newTweetDto, @PathVariable("uid") UUID id) {
         User author = this.userRepository.findByUsername(newTweetDto.getAuthorUsername())
                 .orElseThrow(ResourceNotFoundException::new);
 
-        Tweet tweet = this.tweetRepository.findById(id)
-                .orElseThrow(ResourceNotFoundException::new);
+        Tweet tweet = this.tweetRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
 
         logger.info("{} replying to {}", newTweetDto.getAuthorUsername(), id);
 
@@ -87,7 +94,10 @@ public class TweetController {
         newTweet.setLabel(TweetLabel.unprocessed);
         newTweet.setReplyingTo(tweet);
 
-        return this.tweetRepository.save(newTweet);
+        Tweet savedTweet = this.tweetRepository.save(newTweet);
+
+        this.queueService.sendTweet(savedTweet);
+        return savedTweet;
     }
 
 }

@@ -37,7 +37,6 @@ class Tweet extends Component {
   };
 
   render() {
-    console.log(this.props);
     const { tweet } = this.props;
 
     if (tweet === null) {
@@ -73,6 +72,7 @@ class Tweet extends Component {
               </button>
             )}
             <p>{text}</p>
+            <div></div>
           </div>
 
           <div className="tweet-icons">

@@ -22,6 +22,8 @@ public class TweetMapper {
             .replyToTweet(replyingTo)
             .tweetRepliesIds(new LinkedList<UUID>())
             .insertedAt(source.getInsertedAt())
+            .profanityScore(source.getProfanityScore())
+            .label(source.getLabel())
             .processedAt(source.getProcessedAt())
             .authorUsername(source.getAuthor().getUsername())
             .build();
