@@ -91,3 +91,5 @@ env.sh
 
 # Repo specific
 ops/rabbitmq
+
+build-deploy.sh

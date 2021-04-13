@@ -23,7 +23,7 @@ public class TweetDetailledDto {
     @JsonProperty("author")
     public String authorUsername;
 
-    @JsonProperty("profanity_score")
+    @JsonProperty("label")
     private TweetLabel label;
 
     @JsonProperty("profanity_score")

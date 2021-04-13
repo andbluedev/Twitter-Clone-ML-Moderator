@@ -5,4 +5,4 @@ joblib==0.14.1
 nltk==3.6.1
 pika==1.2.0
 pandas==1.2.3
-psycopg2==2.8.6 # psycopg2-binary==2.8.4
+psycopg2-binary==2.8.4 # to use locally psycopg2==2.8.6
