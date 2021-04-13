@@ -11,8 +11,6 @@ We chose to create and manage the database schema manually.
 
 To generate the PostgreSQL database schema, run the sql satements in `../sql/generate_schema.sql`.
 
-
-
 ## Running the application
 
 To run the API using maven, create the following bash script and run it.
@@ -49,5 +47,3 @@ To run it:
 # Make the bash script executable
 ./start_dev.sh
 ```
-
-

@@ -41,6 +41,7 @@ public class MLQueueService {
             logger.info("routing: '{}' exchange: '{}'", rabbitTemplate.getRoutingKey(), rabbitTemplate.getExchange());
 
             rabbitTemplate.convertAndSend(rabbitTemplate.getExchange(), rabbitTemplate.getRoutingKey(), message);
+
             logger.info("'{}' successfully sent to processing queue", tweet.getId());
 
         } catch (JsonProcessingException e) {
