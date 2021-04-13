@@ -31,19 +31,19 @@ export function formatTweet(tweet, author, authedUser, parentTweet) {
 export function profanityScoreToLevelString(score) {
     let scale = "";
 
-    if (score < 0.3) {
+    if (score < 0.4) {
         return ""
     }
 
     switch (score) {
-        case score < 0.5:
+        case score < 0.6:
             scale = "moderately";
             break;
-        case score < 0.75:
+        case score < 0.8:
             scale = "highly";
             break;
         default:
             scale = "extremely";
     }
-    return `This tweet can contain ${scale} coarsed language. Viewer's discretion is advised.`;
+    return `This tweet can contain ${scale} coarsed language, viewer's discretion is advised.`;
 }

@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import { connect } from "react-redux";
-import { formatTweet, formatDate } from "../utils/helpers";
+import { formatTweet, formatDate, profanityScoreToLevelString } from "../utils/helpers";
 import { Link, withRouter } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 
@@ -16,38 +16,25 @@ import { handleToggleTweet } from "../actions/tweets";
 import './style.css';
 
 
-function TweetContent(props) {
 
-  const [show, setShow] = useState(true);
-  const { text, spamLabel, profanityScore } = props.tweet;
 
-  if (spamLabel === "spam") {
-    return <Alert variant="danger" onClose={() => setShow(false)} dismissible>
-      This tweet labelled as <strong>spam</strong> by Modbot🤖.
-      </Alert>
-
-  }
-
-  if (show) {
-    return <Alert variant="warning" onClose={() => setShow(false)} dismissible>
-      This tweet is being processed by Modbot🤖 ..It should be available shortly to other users.
-    </Alert>
-  }
-  return (
-    <div>
-
-      <p className="text-body">{text}</p>
-    </div>
-
-  )
-}
 
 class Tweet extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { show: true };
+  }
+
+  setShow(value) {
+    this.setState({ show: value });
+  }
+
   toParent = (e, id) => {
     e.preventDefault();
     //todo: redirect to parent tweet
     this.props.history.push(`/tweet/${id}`);
   };
+
 
   handleLike = e => {
     e.preventDefault();
@@ -81,45 +68,65 @@ class Tweet extends Component {
       replies,
       id,
       parent,
-      isProcessed,
-      spamLabel,
       profanityScore,
+      spamLabel
     } = tweet;
 
+
+    const profanityMessage = profanityScoreToLevelString(profanityScore);
+
     return (
-      <Link to={`/tweet/${id}`} className="tweet">
-        <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
+      <Link to={!this.state.show ? `/tweet/${id}` : "#"} >
+        <div className="tweet">
+          <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
 
-        <div className="tweet-info">
-          <div>
-            <span className="text-body">{name}</span>
-            <div>{formatDate(timestamp)} </div>
-            {parent && (
-              <button
-                className="replying-to"
-                onClick={e => this.toParent(e, parent.id)}
-              >
-                Replying to @{parent.author}
-              </button>
-            )}
+          <div className="tweet-info">
             <div>
-              <TweetContent tweet={tweet} />
-            </div>
-            <div></div>
-          </div>
-
-          <div className="tweet-icons">
-            <TiArrowBackOutline className="tweet-icon" />
-            {/* show number only if it's not zero */}
-            <span>{replies !== 0 && replies} </span>
-            <button className="heart-button" onClick={this.handleLike}>
-              {hasLiked === true ? (
-                <TiHeartFullOutline color="#e0245e" className="tweet-icon" />
-              ) : (
-                <TiHeartOutline className="tweet-icon" />
+              <span className="text-body">{name}</span>
+              <div>{formatDate(timestamp)} </div>
+              {parent && (
+                <button
+                  className="replying-to"
+                  onClick={e => this.toParent(e, parent.id)}
+                >
+                  Replying to @{parent.author}
+                </button>
               )}
-            </button>
-            <span>{likes !== 0 && likes} </span>
+              <div>
+                {/* TODO: Factorize this tweet content showing.*/}
+                {this.state.show && spamLabel === "spam" &&
+                  <Alert variant="danger" onClose={() => this.setShow(false)} dismissible>
+                    <strong>Warning ! </strong> This tweet was labelled as <strong>spam</strong> by Modbot 🤖. {profanityMessage}
+                  </Alert>}
+                {this.state.show && spamLabel === "ham" && profanityMessage &&
+                  <Alert variant="danger" onClose={() => this.setShow(false)} dismissible>
+                    <strong>Warning !</strong> {profanityMessage}.
+              </Alert>}
+
+                {this.state.show && spamLabel === "unprocessed" && <Alert variant="warning" onClose={() => this.setShow(false)} dismissible>
+                  This tweet is being processed by Modbot 🤖 ...It should be available shortly to other users.
+                </Alert>}
+
+                {!this.state.show && <div>
+                  <p className="text-body">{text}</p>
+                </div>}
+              </div>
+              <div></div>
+            </div>
+
+            <div className="tweet-icons">
+              <TiArrowBackOutline className="tweet-icon" />
+              {/* show number only if it's not zero */}
+              <span>{replies !== 0 && replies} </span>
+              <button className="heart-button" onClick={this.handleLike}>
+                {hasLiked === true ? (
+                  <TiHeartFullOutline color="#e0245e" className="tweet-icon" />
+                ) : (
+                  <TiHeartOutline className="tweet-icon" />
+                )}
+              </button>
+              <span>{likes !== 0 && likes} </span>
+            </div>
           </div>
         </div>
       </Link>
