@@ -1,6 +1,8 @@
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 CREATE TYPE tweet_label AS ENUM ('ham', 'spam', 'unprocessed');
 
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 
 CREATE table users (
 	id uuid DEFAULT uuid_generate_v4(),
@@ -17,7 +19,7 @@ CREATE TABLE tweets (
 	profanity_index float default null,
 	text VARCHAR(280),
 	
-	author_id uui,
+	author_id uuid,
 	inserted_at TIMESTAMP default CURRENT_TIMESTAMP,
     processed_at TIMESTAMP default null,
     replying_to uuid,
