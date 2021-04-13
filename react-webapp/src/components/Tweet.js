@@ -32,8 +32,6 @@ class Tweet extends Component {
         authedUser
       })
     );
-
-    //
   };
 
   render() {
@@ -54,11 +52,12 @@ class Tweet extends Component {
       id,
       parent
     } = tweet;
+    console.log(tweet)
 
     return (
       <Link to={`/tweet/${id}`} className="tweet">
         <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
-
+        
         <div className="tweet-info">
           <div>
             <span>{name}</span>

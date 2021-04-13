@@ -43,7 +43,7 @@ function getUsers() {
     return get('/user/all')
         .then((res) => {
             const users = res.data.reduce((map, obj) => {
-                map[obj.id] = {...obj, name: 'John Doe' };
+                map[obj.id] = {...obj, name: obj.id };
                 return map;
             }, {});
             return users;

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
 
 import Tweet from "./Tweet";
 import NewTweet from "./NewTweet";
@@ -9,20 +10,20 @@ class TweetPage extends Component {
     const { id, replies } = this.props;
 
     return (
-      <div>
+      <Container>
         <Tweet id={id} />
         {/* passing the parent tweet id */}
-        <NewTweet id={id} />
+        <Row><Col><NewTweet id={id} /></Col></Row>
 
         {replies.length !== 0 && <h3 className="center">Replies</h3>}
         <ul>
           {replies.map(replyId => (
-            <li key={replyId}>
+            <Row><Col><li key={replyId}>
               <Tweet id={replyId} />
-            </li>
+            </li></Col></Row>
           ))}
         </ul>
-      </div>
+      </Container>
     );
   }
 }

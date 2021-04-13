@@ -13,3 +13,18 @@
 .btn {
     border-radius: 2rem;
 }
+
+nav.nav {
+    top: 0;
+    width: 100%;
+    display: flex;
+    margin-bottom: 1rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    height: 10rem;
+}
+
+img.logo {
+    max-height: 10rem;
+}

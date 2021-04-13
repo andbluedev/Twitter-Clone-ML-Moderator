@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import logo from '../img//touitter-logo.jpeg';
+
 export default function Nav() {
   return (
     <nav className="nav">
@@ -15,7 +17,12 @@ export default function Nav() {
             New Tweet
           </NavLink>
         </li>
+
       </ul>
+
+      <div>
+        <img src={logo} className="logo" alt="touitter-logo" />
+      </div>
     </nav>
   );
 }
