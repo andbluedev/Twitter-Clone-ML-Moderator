@@ -1,5 +1,7 @@
 # Twitter Clone with Machine Learning Moderation
 
+![Touitter](react-webapp/src/img/touitter-logo.jpeg)
+
  Twitter Clone with ML Moderator
 
  frontend copied and modified from : [https://github.com/psatler/twitter-clone-react](https://github.com/psatler/twitter-clone-react)
