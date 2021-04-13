@@ -1,28 +1,33 @@
 import React from "react";
+import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
-import logo from '../img//touitter-logo.jpeg';
+import logo from '../img/touitter-logo.jpeg';
 
 export default function Nav() {
   return (
-    <nav className="nav">
-      <ul>
-        <li>
-          <NavLink to="/" exact activeClassName="active">
-            Home
+    <Navbar className="justify-content-between">
+      <div className="nav-links">
+        <NavLink to="/" exact activeClassName="active" className="nav-link">
+          Home
           </NavLink>
-        </li>
-        <li>
-          <NavLink to="/new" activeClassName="active">
-            New Tweet
+        <NavLink to="/new" activeClassName="active" className="nav-link">
+          New Tweet
           </NavLink>
-        </li>
-
-      </ul>
-
-      <div>
-        <img src={logo} className="logo" alt="touitter-logo" />
       </div>
-    </nav>
+      <div className="logo">
+        <Navbar.Brand>
+          <NavLink to="/">
+            <img
+              alt="touitter-logo"
+              src={logo}
+              width="200"
+              height="80"
+              className="d-inline-block align-top"
+            />
+          </NavLink>
+        </Navbar.Brand>
+      </div>
+    </Navbar>
   );
 }

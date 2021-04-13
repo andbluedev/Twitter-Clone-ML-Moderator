@@ -1,5 +1,8 @@
-.tweet {
+.tweet,
+.tweet:focus,
+.tweet:hover {
     border-radius: 2rem;
+    text-decoration: none;
 }
 
 .textarea {
@@ -14,17 +17,22 @@
     border-radius: 2rem;
 }
 
-nav.nav {
+.nav-links {
     top: 0;
     width: 100%;
     display: flex;
     margin-bottom: 1rem;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
-    height: 10rem;
+    padding: 1rem;
 }
 
-img.logo {
-    max-height: 10rem;
+ul.nav li a,
+ul.nav li a:visited {
+    color: black !important;
+}
+
+.nav-link {
+    padding: 1rem;
+    color: black !important;
 }

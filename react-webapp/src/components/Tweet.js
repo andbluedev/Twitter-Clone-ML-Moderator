@@ -1,16 +1,46 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { connect } from "react-redux";
 import { formatTweet, formatDate } from "../utils/helpers";
 import { Link, withRouter } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+
 
 //importing icons from react-icons
 import { TiArrowBackOutline } from "react-icons/ti";
 import { TiHeartOutline } from "react-icons/ti";
-import { TiHeartFullOutline } from "react-icons/ti";
+import { TiHeartFullOutline, TiArrowRepeat } from "react-icons/ti";
 
 import { handleToggleTweet } from "../actions/tweets";
 
+
 import './style.css';
+
+
+function TweetContent(props) {
+
+  const [show, setShow] = useState(true);
+  const { text, spamLabel, profanityScore } = props.tweet;
+
+  if (spamLabel === "spam") {
+    return <Alert variant="danger" onClose={() => setShow(false)} dismissible>
+      This tweet labelled as <strong>spam</strong> by Modbot🤖.
+      </Alert>
+
+  }
+
+  if (show) {
+    return <Alert variant="warning" onClose={() => setShow(false)} dismissible>
+      This tweet is being processed by Modbot🤖 ..It should be available shortly to other users.
+    </Alert>
+  }
+  return (
+    <div>
+
+      <p className="text-body">{text}</p>
+    </div>
+
+  )
+}
 
 class Tweet extends Component {
   toParent = (e, id) => {
@@ -50,17 +80,19 @@ class Tweet extends Component {
       likes,
       replies,
       id,
-      parent
+      parent,
+      isProcessed,
+      spamLabel,
+      profanityScore,
     } = tweet;
-    console.log(tweet)
 
     return (
       <Link to={`/tweet/${id}`} className="tweet">
         <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
-        
+
         <div className="tweet-info">
           <div>
-            <span>{name}</span>
+            <span className="text-body">{name}</span>
             <div>{formatDate(timestamp)} </div>
             {parent && (
               <button
@@ -70,7 +102,9 @@ class Tweet extends Component {
                 Replying to @{parent.author}
               </button>
             )}
-            <p>{text}</p>
+            <div>
+              <TweetContent tweet={tweet} />
+            </div>
             <div></div>
           </div>
 
