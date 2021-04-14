@@ -4,7 +4,7 @@
 
 This educational project aims to show how social medias can be can moderated using AI systems.
 
-We chose to produce a "Twitter Clone" using [React.js](reactjs.org) as frontend backed by a [Spring Boot](https://spring.io/projects/spring-boot) REST API (with a PostgreSQL database) and a ML (sklearn) python service. The application clones processes new tweets by identifying if they are **spam** and adding a language **profanity score**.
+We chose to produce a "Twitter Clone" using [React.js](reactjs.org) as frontend backed by a [Spring Boot](https://spring.io/projects/spring-boot) REST API (with a PostgreSQL database) and a ML ([sklearn](https://scikit-learn.org/stable/)) python service. The application clones processes new tweets by identifying if they are **spam** and adding a language **profanity score**.
 
 ## Live Demo
 
@@ -19,6 +19,7 @@ The frontend was copied and modified from: [https://github.com/psatler/twitter-c
 ### Architecture
 
 ![architecture-overview](docs/architecture-overview.jpg)
+
 
 The components of the architecture are containerized using Docker; the webapp, the REST api and ML service are deployed on an on-premise kubernetes cluster.
 
