@@ -1,8 +1,12 @@
 .tweet,
 .tweet:focus,
-.tweet:hover {
+.tweet:hover .tweet:active {
     border-radius: 2rem;
     text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none !important;
 }
 
 .textarea {

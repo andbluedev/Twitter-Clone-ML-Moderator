@@ -72,11 +72,11 @@ class Tweet extends Component {
       spamLabel
     } = tweet;
 
-
     const profanityMessage = profanityScoreToLevelString(profanityScore);
+    const enableLink = !this.state.show || (spamLabel === "ham" && !profanityMessage)
 
     return (
-      <Link to={!this.state.show ? `/tweet/${id}` : "#"} >
+      <Link to={ enableLink ? `/tweet/${id}` : "#"} >
         <div className="tweet">
           <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
 
@@ -108,6 +108,10 @@ class Tweet extends Component {
                 </Alert>}
 
                 {!this.state.show && <div>
+                  <p className="text-body">{text}</p>
+                </div>}
+
+                {this.state.show && spamLabel === "ham" && !profanityMessage && <div>
                   <p className="text-body">{text}</p>
                 </div>}
               </div>
