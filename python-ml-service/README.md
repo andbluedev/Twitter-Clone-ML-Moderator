@@ -25,7 +25,7 @@ Open a first command line console and begin by calling the receive file :
 python receive.py
 ```
 
-Open a second command line console And then call the send file :
+Open a second command line console and then call the send file :
 
 ```bash
 python send.py
