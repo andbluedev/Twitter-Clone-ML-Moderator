@@ -19,11 +19,11 @@ npm install
 npm start
 ```
 
-## Build the docker container
+## Running the app using Docker
 
 The application in production is run using a docker container.
 
-### Building the docker container
+### Docker container
 
 Install the npm dependencies:
 
