@@ -23,7 +23,7 @@ npm start
 
 The application in production is run using a docker container, but we still run it on any computer if it supports docker for developement or just simply running the application.
 
-### Docker container
+### Building the Docker image
 
 Install the npm dependencies:
 
