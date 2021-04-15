@@ -48,8 +48,8 @@ Open a second command line console and then call the [send file](./send.py) :
 ```bash
 # if environement variables have already been exported
 python send.py
-# or python
-source ../.env && send.py
+# or
+source ../.env && python send.py
 ```
 
 Step by step local implementation guidelines can be found here : https://www.rabbitmq.com/tutorials/tutorial-one-python.html
