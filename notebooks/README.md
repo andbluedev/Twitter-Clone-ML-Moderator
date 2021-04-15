@@ -25,6 +25,6 @@ The ML model selected for ModBot is a Multinomial Naive Bayes model.
 
 The SKLearn Pipeline method is used to accelerate sample predictions.
 
-Pickles are dumped in this notebook for the RabbitMQ message queue service used in the complete project implementation.
+Joblib pickles are dumped in this notebook for the RabbitMQ message queue service used in the complete project implementation.
 
 
