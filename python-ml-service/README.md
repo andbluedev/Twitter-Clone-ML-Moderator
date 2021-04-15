@@ -27,7 +27,7 @@ Installing python dependencies.
 pip install -r requirements.txt
 ```
 
-⚠️ Define and export the environement variables of the `RABBIT SPECIFIC` section as described [here]( https://github.com/andbluedev/Twitter-Clone-ML-Moderator#environment-variables) **before running any python file!**.⚠️ 
+⚠️ Define and export the environment variables of the `RABBIT SPECIFIC` section as described [here]( https://github.com/andbluedev/Twitter-Clone-ML-Moderator#environment-variables) **before running any python file!**.⚠️ 
 
 Once defined environment variables, export them running:
 ```bash
