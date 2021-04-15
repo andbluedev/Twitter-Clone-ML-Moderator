@@ -8,10 +8,10 @@ RabbitMQ is message queue service that can work with python files : https://www.
 
 ## Implementation
 
-RabbitMQ requires two files : send and receive, both are plugged to a defined connection method using the pika library from python.
+RabbitMQ requires two files : send and receive, both are plugged to a defined connection method using the pika library from python. Requirements can be met by calling the requirements file.
 
 ```bash
-pip install pika
+pip install -r requirements.txt
 ```
 
 Receive.py is an endless loop awaiting messages to be sent to its connection, in our case from the send.py file.
@@ -19,13 +19,13 @@ Receive.py works with joblib pickles originating from the ModBot notebook.
 
 To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html.
 
-Open a command line console and begin by calling the receive file :
+Open a first command line console and begin by calling the receive file :
 
 ```bash
 python receive.py
 ```
 
-And then the send file :
+Open a second command line console And then call the send file :
 
 ```bash
 python send.py
