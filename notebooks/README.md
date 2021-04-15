@@ -15,7 +15,9 @@ The data consists of 5,572 text messages flagged by either 'spam' or 'ham' (safe
 
 Once requirements are met and module versions are correctly installed the notebook can be executed. Modules have been installed using pip 21.0.1 : https://pypi.org/project/pip/
 
-```bash pip install -r requirements.txt```
+```bash
+pip install -r requirements.txt
+```
 
 The notebook provides some data evaluation before defining the prediction algorithm.
 
