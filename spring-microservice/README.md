@@ -1,4 +1,14 @@
-## Setting Up Database
+# Touitter REST API
+
+Spring Boot Application backed by a PostgreSQL database and a RabbitMQ queue (consumed linked to a python).
+
+The REST API uses java, maven and docker:
+
+* [installing java](https://www.oracle.com/fr/java/technologies/javase/jdk12-archive-downloads.html) (version used: openjdk 12.0.1)
+* [installing maven](https://maven.apache.org/install.html) (version used: 3.6.2)
+* [installing docker](https://docs.docker.com/get-docker/) (version used: 20.10.5)
+
+## Setting Up the Database
 
 On a postgreSQL instance (local or remote) create a dev user and database.
 
@@ -13,26 +23,15 @@ To generate the PostgreSQL database schema, run the sql satements in `../sql/gen
 
 ## Running the application
 
-To run the API using maven, create the following bash script and run it.
+⚠️ Define and export the environment variables of the `RABBIT SPECIFIC` section as described [here]( https://github.com/andbluedev/Twitter-Clone-ML-Moderator#environment-variables) **before running any python file***! ⚠️
+
+After defining the environment variables, create the following bash script and run it.
+
 ```bash
 #  start_dev.sh
 ./mvnw clean
-export REALM_NAME=<KEYCLOACK_REALM>
-export KEYCLOAK_SERVER_URL=<KEY_CLOACK_SERVER_URL_WITH_PORT>
-export CLIENT_ID=<KEYCLOAK_CLIENT_ID>
-export CLIENT_SECRET=<KEYCLOAK_CLIENT_SECRET>
 
-export POSTGRESQL_DATABASE_NAME=<DATABASE_NAME>
-export POSTGRESQL_PORT=<DATABASE_PORT> # 5432
-export POSTGRESQL_URL=<DABASE_URL> # example.com, localhost
-export POSTGRESQL_USER=<DATABASE_URL>
-export POSTGRESQL_PASSWORD=<DATABASE_PASSWORD>
-export WEBAPP_URL=<F># http://localhost:3000
-
-export MQ_HOST=<RABBITMQ_HOST> # example.com, localhost
-export MQ_USER=<RABBITMQ_HOST>
-export MQ_PASSWORD=<RABBITMQ_PASSWORD>
-export MQ_QUEUE=<RABBITMQ_QUEUE_NAME>
+source ../.env
 
 ./mvnw spring-boot:run -Dspring.profiles.active=dev
 ```
@@ -46,4 +45,24 @@ To run it:
 ```bash
 # Make the bash script executable
 ./start_dev.sh
+```
+
+## Running the app using Docker
+
+The application in production is run using a docker container, but we still run it on any computer if it supports docker for developement or just simply running the application.
+
+### Building the Docker image
+
+Build the doker image and tag it as `touitter-restapi:v1`.
+
+```bash
+docker build -t touitter-restapi:v1 .
+```
+
+### Running the docker container
+
+Running the docker container and exposing the spring boot application to port 8000 of the host (to access it on [localhost:8000](localhost:8000)).
+
+```bash
+docker run -p 8000:8000 touitter-restapi:v1
 ```
