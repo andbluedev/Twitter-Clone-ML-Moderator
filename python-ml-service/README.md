@@ -11,10 +11,15 @@ RabbitMQ is message queue service that can work with python files : https://www.
 
 RabbitMQ requires two files : send and receive, both are plugged to a defined connection method using the pika library from python. Requirements can be met by calling the requirements file.
 
-## Installing Development Environment
-
 [receive.py](./receive.py): is an endless loop awaiting messages to be sent to its connection, in our case from the send.py file.
 [receive.py](./receive.py) works with joblib pickles originating from the ModBot notebook.
+
+
+## Installing Development Environment
+
+Install and launch a RabbitMQ instance.
+
+To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html (or use the docker-compose file included in [ops/](../ops).
 
 Installing python dependencies.
 
@@ -28,8 +33,6 @@ Once defined environment variables, export them running:
 ```bash
 source ../.env
 ```
-
-To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html.
 
 Open a first command line console and begin by calling the [receive file](./receive.py) :
 
@@ -65,5 +68,5 @@ docker build -t touitter-ml-service:v1 .
 Running the docker container from the previous image (TODO must pass in environment variables).
 
 ```bash
-docker run -p 3000:80 touitter-ml-service:v1 . .
+docker run touitter-ml-service:v1 . .
 ```
