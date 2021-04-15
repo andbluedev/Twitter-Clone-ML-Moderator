@@ -51,7 +51,7 @@ The application's services and the docker-compose files of [ops/](./ops) require
 The easiest way to deal these environement variables is to create at the base of this repository a bash filled that exported environement varibles.
 
 
-We create a a `.env` and put the following content (replace the `<Variable explanation>` values by the actual variables of environement (local or production).
+Create a `.env` and put the following content (replace the `<Variable explanation>` values by the actual variables of environement (local or production).
 ```bash
 # .env
 
