@@ -21,7 +21,7 @@ npm start
 
 ## Running the app using Docker
 
-The application in production is run using a docker container.
+The application in production is run using a docker container, but we still run it on any computer if it supports docker for developement or just simply running the application.
 
 ### Docker container
 
