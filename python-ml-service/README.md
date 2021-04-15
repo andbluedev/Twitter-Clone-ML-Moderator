@@ -38,4 +38,19 @@ python send.py
 
 Step by step local implementation guidelines can be found here : https://www.rabbitmq.com/tutorials/tutorial-one-python.html
 
+## Running the app using Docker
 
+The application in production is run using a docker container, but we still run it on any computer if it supports docker for developement or just simply running the application.
+
+
+Building the docker image.
+
+```bash
+docker build -t touitter-ml-service:v1 .
+```
+
+Running the docker container from the previous image.
+
+```bash
+docker run -p 3000:80 touitter-ml-service:v1 . .
+```
