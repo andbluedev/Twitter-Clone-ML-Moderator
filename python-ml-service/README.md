@@ -2,20 +2,25 @@
 
 ## Context
 
-Here lies the implementation of the ModBot algorithm found in the notebooks folder of our project's repository : https://github.com/andbluedev/Twitter-Clone-ML-Moderator/tree/master/notebooks
+Here lies the implementation of the ModBot algorithm found in the notebooks folder of our project's repository : [notebooks](../notebooks)
 
 RabbitMQ is message queue service that can work with python files : https://www.rabbitmq.com/
+
 
 ## Implementation
 
 RabbitMQ requires two files : send and receive, both are plugged to a defined connection method using the pika library from python. Requirements can be met by calling the requirements file.
 
+## Installing Development Environement
+
+[receive.py](./receive.py): is an endless loop awaiting messages to be sent to its connection, in our case from the send.py file.
+[receive.py](./receive.py) works with joblib pickles originating from the ModBot notebook.
+
+Installing python dependencies.
+
 ```bash
 pip install -r requirements.txt
 ```
-
-Receive.py is an endless loop awaiting messages to be sent to its connection, in our case from the send.py file.
-Receive.py works with joblib pickles originating from the ModBot notebook.
 
 To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html.
 
