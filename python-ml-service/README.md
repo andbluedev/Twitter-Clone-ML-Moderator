@@ -22,18 +22,31 @@ Installing python dependencies.
 pip install -r requirements.txt
 ```
 
+⚠️ Define and export the environement variables of the `RABBIT SPECIFIC` section as described [here]( https://github.com/andbluedev/Twitter-Clone-ML-Moderator#environment-variables) **before running any python file!**.⚠️ 
+
+Once defined environment variables, export them running:
+```bash
+source ../.env
+```
+
 To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html.
 
 Open a first command line console and begin by calling the [receive file](./receive.py) :
 
 ```bash
+# if environement variables have already been exported
 python receive.py
+# or 
+source ../.env && python receive.py
 ```
 
 Open a second command line console and then call the [send file](./send.py) :
 
 ```bash
+# if environement variables have already been exported
 python send.py
+# or python
+source ../.env && send.py
 ```
 
 Step by step local implementation guidelines can be found here : https://www.rabbitmq.com/tutorials/tutorial-one-python.html
