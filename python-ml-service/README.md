@@ -49,7 +49,7 @@ Building the docker image.
 docker build -t touitter-ml-service:v1 .
 ```
 
-Running the docker container from the previous image.
+Running the docker container from the previous image (TODO must pass in environment variables).
 
 ```bash
 docker run -p 3000:80 touitter-ml-service:v1 . .
