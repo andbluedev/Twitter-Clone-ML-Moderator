@@ -19,13 +19,13 @@ Receive.py works with joblib pickles originating from the ModBot notebook.
 
 To launch RabbitMQ on your machine, download appropriate installer from https://www.rabbitmq.com/download.html.
 
-Open a first command line console and begin by calling the receive file :
+Open a first command line console and begin by calling the [receive file](./receive.py) :
 
 ```bash
 python receive.py
 ```
 
-Open a second command line console and then call the send file :
+Open a second command line console and then call the [send file](./send.py) :
 
 ```bash
 python send.py
