@@ -31,12 +31,12 @@ export function getInitialData() {
 
 function get(path) {
     let url = process.env.REACT_APP_API_URI + path;
-    return axiosGet(url);
+    return axiosGet(url, { headers: getHeaders() });
 }
 
 function post(path, payload) {
     let url = process.env.REACT_APP_API_URI + path;
-    return axiosPost(url, payload);
+    return axiosPost(url, payload, { headers: getHeaders() });
 }
 
 function getUsers() {
@@ -88,4 +88,9 @@ export function saveTweet(info) {
         });
 }
 
-// return _saveTweet(info)
+
+function getHeaders() {
+    const token = sessionStorage.getItem("kctoken");
+    return { Authorization: `Bearer ${token}` }
+
+}

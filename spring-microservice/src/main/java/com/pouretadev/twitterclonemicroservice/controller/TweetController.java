@@ -46,7 +46,7 @@ public class TweetController {
         this.queueService = queueService;
     }
 
-    // @RolesAllowed("user")
+    @RolesAllowed("user")
     @GetMapping("/all")
     public List<TweetDetailledDto> getAllTweets() {
         List<Tweet> tweets = this.tweetRepository.findAll();
@@ -56,6 +56,7 @@ public class TweetController {
         return this.tweetMapper.mapToListDto(tweets);
     }
 
+    @RolesAllowed("user")
     @PostMapping("/new")
     @ResponseStatus(HttpStatus.CREATED)
     public Tweet createTweet(@RequestBody NewTweetDto newTweetDto) {
@@ -77,6 +78,7 @@ public class TweetController {
         return savedTweet;
     }
 
+    @RolesAllowed("user")
     @PostMapping("/{uid}/reply")
     @ResponseStatus(HttpStatus.CREATED)
     public Tweet replyingToTweet(@RequestBody NewTweetDto newTweetDto, @PathVariable("uid") UUID id) {

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navbar } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 import logo from '../img/touitter-logo.jpeg';
 
 export default function Nav() {
+  const [logoutUrl, setLogoutUrl] = useState("");
+
+  useEffect(() => {
+    setLogoutUrl(sessionStorage.getItem("kcLogoutUrl"));
+  }, [])
+
   return (
     <Navbar className="justify-content-between">
       <div className="nav-links">
@@ -14,6 +20,7 @@ export default function Nav() {
         <NavLink to="/new" activeClassName="active" className="nav-link">
           New Tweet
           </NavLink>
+        {logoutUrl && <a className="nav-link" href={logoutUrl}>Logout</a>}
       </div>
       <div className="logo">
         <Navbar.Brand>
