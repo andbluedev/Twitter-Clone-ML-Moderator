@@ -33,7 +33,7 @@ public class UserController {
     public List<UserDetailledDto> getAllUsers() {
         List<User> users = userRepository.findAll();
 
-        logger.info("Fetched {} detailled users: {}", users.size());
+        logger.info("Fetched {} detailled users:", users.size());
 
         return this.userMapper.mapToListDto(users);
     }
