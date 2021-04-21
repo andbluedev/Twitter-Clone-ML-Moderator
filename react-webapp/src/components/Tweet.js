@@ -16,9 +16,6 @@ import { handleToggleTweet } from "../actions/tweets";
 import './style.css';
 
 
-
-
-
 class Tweet extends Component {
   constructor(props) {
     super(props);
@@ -73,10 +70,10 @@ class Tweet extends Component {
     } = tweet;
 
     const profanityMessage = profanityScoreToLevelString(profanityScore);
-    const enableLink = !this.state.show || (spamLabel === "ham" && !profanityMessage)
+    const enableLink = !this.state.show || (spamLabel === "ham" && !profanityMessage)
 
     return (
-      <Link to={ enableLink ? `/tweet/${id}` : "#"} >
+      <Link to={enableLink ? `/tweet/${id}` : "#"} >
         <div className="tweet">
           <img src={avatar} alt={`Avatar of ${name}`} className="avatar" />
 

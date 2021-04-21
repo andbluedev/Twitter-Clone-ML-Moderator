@@ -74,9 +74,9 @@ export function saveLikeToggle(info) {
 }
 
 export function saveTweet(info) {
-    let path = "/tweet/new"
+    let path = "/tweet/new";
 
-    if (info.replyingto) {
+    if (info.replyingTo) {
         path = `/tweet/${info.replyingTo}/reply`;
     }
     return post(path, { text: info.text, author: info.author })

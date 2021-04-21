@@ -43,19 +43,13 @@ const loadData = () => {
   sessionStorage.setItem('kctoken', keycloak.token);
   sessionStorage.setItem('kcLogoutUrl', logoutUrl);
 
-  //Updating some value in store to re-render the component
-  console.log("keycloack", keycloak.subject)
-  console.log("keycloack logout", logoutUrl)
-  console.log("keycloack token", keycloak.token)
-
   keycloak.loadUserProfile()
     .then(function (profile) {
-      console.log("profile", JSON.stringify(profile, null, "  "));
+      store.dispatch(setAuthedUser(profile));
     }).catch(function () {
-      alert('Failed to load user profile');
+      console.error('Failed to load keycloak user profile');
     });
 
-  store.dispatch(setAuthedUser('Welcome!'));
 }
 
 ReactDOM.render(
