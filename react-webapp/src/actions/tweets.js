@@ -22,13 +22,13 @@ export function handleAddTweet(text, replyingTo) {
         dispatch(showLoading()); //show loading bar
         return saveTweet({
                 text,
-                author: authedUser,
+                author: authedUser.username,
                 replyingTo
             })
             .then(tweet => {
                 return dispatch(addTweet({
                     ...tweet,
-                    author: tweet.author.name,
+                    author: authedUser.username,
                     likes: [],
                     replies: tweet.replies ? tweet.replies : [],
                     replyingTo: replyingTo,

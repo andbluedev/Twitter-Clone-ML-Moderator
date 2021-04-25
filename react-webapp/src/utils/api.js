@@ -31,12 +31,12 @@ export function getInitialData() {
 
 function get(path) {
     let url = process.env.REACT_APP_API_URI + path;
-    return axiosGet(url);
+    return axiosGet(url, { headers: getHeaders() });
 }
 
 function post(path, payload) {
     let url = process.env.REACT_APP_API_URI + path;
-    return axiosPost(url, payload);
+    return axiosPost(url, payload, { headers: getHeaders() });
 }
 
 function getUsers() {
@@ -74,9 +74,9 @@ export function saveLikeToggle(info) {
 }
 
 export function saveTweet(info) {
-    let path = "/tweet/new"
+    let path = "/tweet/new";
 
-    if (info.replyingto) {
+    if (info.replyingTo) {
         path = `/tweet/${info.replyingTo}/reply`;
     }
     return post(path, { text: info.text, author: info.author })
@@ -88,4 +88,9 @@ export function saveTweet(info) {
         });
 }
 
-// return _saveTweet(info)
+
+function getHeaders() {
+    const token = sessionStorage.getItem("kctoken");
+    return { Authorization: `Bearer ${token}` }
+
+}

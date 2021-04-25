@@ -8,6 +8,8 @@ import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.hibernate.annotations.Type;
 
 import java.util.List;
@@ -32,6 +34,7 @@ public class User {
     @JsonProperty("avatarURL")
     private String avatarUrl;
 
+    @Generated(GenerationTime.INSERT)
     @Column(name = "inserted_at")
     private Timestamp insertedAt;
     
