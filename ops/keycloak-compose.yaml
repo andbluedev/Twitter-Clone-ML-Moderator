@@ -7,6 +7,7 @@ volumes:
 services:
   postgres:
       image: postgres
+      restart: always
       volumes:
         - postgres_data:/var/lib/postgresql/data
       environment:
@@ -18,6 +19,7 @@ services:
 
   keycloak:
       image: quay.io/keycloak/keycloak:latest
+      restart: always
       environment:
         DB_VENDOR: POSTGRES
         DB_ADDR: postgres
