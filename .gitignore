@@ -46,6 +46,9 @@ cache/
 *.xlsx
 venv
 
+# kubernetes related
+kubeconfig
+
 # Spring related
 
 HELP.md
@@ -93,6 +96,7 @@ env.sh
 ops/rabbitmq
 
 build-deploy.sh
+
 
 # Helm specific
 helm-chart/values-prod.yaml

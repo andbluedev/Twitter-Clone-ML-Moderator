@@ -8,7 +8,7 @@ The chart requires the following external dependencies:
 * [RabbitMQ](https://www.rabbitmq.com/) instance with a created database for Touitter
 * [Keycloak](https://www.keycloak.org) instance with valid application mappings for Touitter.
 
-To install the chart with the release name `touitter-dev` with default values ():
+To install the chart with the release name `touitter-dev` with default values:
 
 ``` bash
 helm install touitter-dev ./helm-chart
