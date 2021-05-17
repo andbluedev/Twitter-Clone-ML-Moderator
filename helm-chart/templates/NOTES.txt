@@ -1,0 +1,20 @@
+1. Get the application URL by running these commands:
+{{- if .Values.ingress.enabled }}
+{{- range $host := .Values.ingress.hosts }}
+  {{- range .paths }}
+  http{{ if $.Values.ingress.tls }}s{{ end }}://{{ $host.host }}{{ .path }}
+  {{- end }}
+{{- end }}
+{{- else }}
+  export POD_WEBAPP_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ include "helm-chart.name" . }},tier=webapp" -o jsonpath="{.items[0].metadata.name}")
+  export POD_RESTAPI_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app={{ include "helm-chart.name" . }},tier=restapi" -o jsonpath="{.items[0].metadata.name}")
+
+  export CONTAINER_WEBAPP_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_WEBAPP_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  export CONTAINER_RESTAPI_PORT=$(kubectl get pod --namespace {{ .Release.Namespace }} $POD_RESTAPI_NAME -o jsonpath="{.spec.containers[0].ports[0].containerPort}")
+  
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_WEBAPP_NAME 3000:$CONTAINER_WEBAPP_PORT
+  kubectl --namespace {{ .Release.Namespace }} port-forward $POD_RESTAPI_NAME 8000:$CONTAINER_RESTAPI_PORT
+
+  echo "Visit http://127.0.0.1:3000 to view the webapp"
+  echo "Open another terminal tab and visit the REST API is exposed on http://127.0.0.1:8000"
+{{- end }}

@@ -1,0 +1,217 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-chart.fullname" . }}-api
+  labels:
+    app: {{ include "helm-chart.name" . }}
+    tier: restapi
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "helm-chart.name" . }}
+      tier: restapi
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ include "helm-chart.name" . }}
+        tier: restapi
+    spec:
+      containers:
+      - name: "{{ include "helm-chart.name" . }}-api"
+        image: {{ .Values.images.api }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 8000
+        env:
+        - name: POSTGRESQL_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_url
+        - name: POSTGRESQL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_port
+        - name: POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_user
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_password
+        - name: POSTGRESQL_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_dbname
+        - name: MQ_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_url
+        - name: MQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_user
+        - name: MQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_password
+        - name: MQ_QUEUE
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_queue_name
+        - name: WEBAPP_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: webapp_url
+        - name: CLIENT_ID
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: keycloak_client_id
+        - name: KEYCLOAK_SERVER_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: keycloak_url
+        - name: CLIENT_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: keycloak_client_secret
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-chart.fullname" . }}-front
+  labels:
+    app: {{ include "helm-chart.name" . }}
+    tier: webapp
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "helm-chart.name" . }}
+      tier: webapp
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ include "helm-chart.name" . }}
+        tier: webapp
+    spec:
+      containers:
+      - name: "{{ include "helm-chart.name" . }}-front"
+        image: {{ .Values.images.frontend }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "helm-chart.fullname" . }}-mlservice
+  labels:
+    app: {{ include "helm-chart.name" . }}
+    tier: mlservice
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "helm-chart.name" . }}
+      tier: mlservice
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: {{ include "helm-chart.name" . }}
+        tier: mlservice
+    spec:
+      containers:
+      - name: "{{ include "helm-chart.name" . }}-mlservice"
+        image: {{ .Values.images.mlservice }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        ports:
+        - containerPort: 80
+        command: ["python3", "receive.py"]
+        env:
+        - name: POSTGRESQL_URL
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_url
+        - name: POSTGRESQL_PORT
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_port
+        - name: POSTGRESQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_user
+        - name: POSTGRESQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_password
+        - name: POSTGRESQL_DATABASE_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: postgresql_dbname
+        - name: MQ_HOST
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_url
+        - name: MQ_USER
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_user
+        - name: MQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_password
+        - name: MQ_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_password
+        - name: MQ_QUEUE
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: rabbitmq_queue_name
+      resources:
+        {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
