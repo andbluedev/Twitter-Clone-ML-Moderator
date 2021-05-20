@@ -18,3 +18,9 @@
   echo "Visit http://127.0.0.1:3000 to view the webapp"
   echo "Open another terminal tab and visit the REST API is exposed on http://127.0.0.1:8000"
 {{- end }}
+
+
+2. View application logs
+
+kubectl --kubeconfig ./kubeconfig logs $POD_WEBAPP_NAME
+kubectl --kubeconfig ./kubeconfig logs $POD_RESTAPI_NAME
