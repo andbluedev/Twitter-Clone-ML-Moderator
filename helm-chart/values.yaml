@@ -33,6 +33,7 @@ environment:
     url: https://keycloak.example.com:8443
     back_client_id: springboot-microservice-dev
     back_client_secret: abcdef-123-abcdef-12345
+    realm: Touitter-apps
 
 
 service:

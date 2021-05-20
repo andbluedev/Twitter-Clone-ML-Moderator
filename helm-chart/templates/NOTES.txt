@@ -24,8 +24,8 @@
 
 2. View application logs
 
-kubectl --kubeconfig ./kubeconfig logs $POD_WEBAPP_NAME
-kubectl --kubeconfig ./kubeconfig logs $POD_RESTAPI_NAME
+kubectl logs $POD_WEBAPP_NAME
+kubectl logs $POD_RESTAPI_NAME
 
 # Exposing the application to world
 

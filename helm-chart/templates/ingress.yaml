@@ -14,18 +14,18 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /front
+      - path: /
         pathType: Prefix
         backend:
           service:
-            name: {{ include "helm-chart.fullname" . }}-front
+            name: {{ include "helm-chart.fullname" . }}-webapp
             port:
               number: 3000
       - path: /api
         pathType: Prefix
         backend:
           service: 
-            name: {{ include "helm-chart.fullname" . }}-api
+            name: {{ include "helm-chart.fullname" . }}-core-restapi
             port:
               number: 8000
   {{- if .Values.ingress.tls }}

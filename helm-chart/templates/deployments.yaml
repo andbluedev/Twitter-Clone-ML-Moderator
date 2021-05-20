@@ -1,25 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm-chart.fullname" . }}-api
+  name: {{ include "helm-chart.fullname" . }}-core-restapi
   labels:
-    app: {{ include "helm-chart.name" . }}
-    tier: restapi
+    app: {{ include "helm-chart.name" . }}-core-restapi
 spec:
   selector:
     matchLabels:
-      app: {{ include "helm-chart.name" . }}
-      tier: restapi
+      app: {{ include "helm-chart.name" . }}-core-restapi
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: {{ include "helm-chart.name" . }}
-        tier: restapi
+        app: {{ include "helm-chart.name" . }}-core-restapi
     spec:
       containers:
-      - name: "{{ include "helm-chart.name" . }}-api"
+      - name: "{{ include "helm-chart.name" . }}-core-restapi"
         image: {{ .Values.images.api }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
@@ -85,6 +82,11 @@ spec:
             secretKeyRef:
               name: {{ include "helm-chart.name" . }}-secrets
               key: keycloak_url
+        - name: REALM_NAME
+          valueFrom:
+            secretKeyRef:
+              name: {{ include "helm-chart.name" . }}-secrets
+              key: keycloak_realm
         - name: CLIENT_SECRET
           valueFrom:
             secretKeyRef:
@@ -100,25 +102,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm-chart.fullname" . }}-front
+  name: {{ include "helm-chart.fullname" . }}-webapp
   labels:
-    app: {{ include "helm-chart.name" . }}
-    tier: webapp
+    app: {{ include "helm-chart.name" . }}-webapp
 spec:
   selector:
     matchLabels:
-      app: {{ include "helm-chart.name" . }}
-      tier: webapp
+      app: {{ include "helm-chart.name" . }}-webapp
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: {{ include "helm-chart.name" . }}
-        tier: webapp
+        app: {{ include "helm-chart.name" . }}-webapp
     spec:
       containers:
-      - name: "{{ include "helm-chart.name" . }}-front"
+      - name: "{{ include "helm-chart.name" . }}-webapp"
         image: {{ .Values.images.frontend }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
@@ -135,20 +134,17 @@ kind: Deployment
 metadata:
   name: {{ include "helm-chart.fullname" . }}-mlservice
   labels:
-    app: {{ include "helm-chart.name" . }}
-    tier: mlservice
+    app: {{ include "helm-chart.name" . }}-mlservice
 spec:
   selector:
     matchLabels:
-      app: {{ include "helm-chart.name" . }}
-      tier: mlservice
+      app: {{ include "helm-chart.name" . }}-mlservice
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: {{ include "helm-chart.name" . }}
-        tier: mlservice
+        app: {{ include "helm-chart.name" . }}-mlservice
     spec:
       containers:
       - name: "{{ include "helm-chart.name" . }}-mlservice"
