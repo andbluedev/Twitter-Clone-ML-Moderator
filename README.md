@@ -63,7 +63,7 @@ export CLIENT_SECRET=# <KEYCLOAK CLIENT SECRET generated when creating a new key
 export KEYCLOAK_USER=# <KEYCLOACK USER for the Keycloak Server instance to create with ops/keycloak-compose.yaml>
 export KEYCLOAK_DATABASE=# <KEYCLOACK USER DATABASE for the PostgreSQL instance to create with ops/keycloak-compose.yaml>
 export KEYCLOAK_PASSWORD=# <KEYCLOACK USER PASSWORD for the Keycloak Server instance to create with ops/keycloak-compose.yaml>
-export DATABASE_ROOT_PASSWORD='ZFMF2kZ2|ds34:3'
+export DATABASE_ROOT_PASSWORD==# <DATABASE PASSWORD>
 ## KEYCLOAK SPECIFIC (if using SSL)
 export CERTIFICATE_PATH=# <KEYCLOAK SERVER PATH TO SSL CERTIFICATE, example value: `/etc/letsencrypt/live/keycloak.example.com/fullchain.pem`>
 export PRIVKEY_PATH=# <KEYCLOAK SERVER PATH TO CERTIFICATE PRIVATE KEY, example value: `/etc/letsencrypt/live/keycloak.example.com/privkey.pem`>
